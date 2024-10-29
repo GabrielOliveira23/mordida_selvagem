@@ -1,4 +1,4 @@
 extends Resource
-class_name QuizTheme
+class_name ChainTheme
 
-@export var theme: Array[QuizQuestion]
+@export var theme: Array[ChainProblem]

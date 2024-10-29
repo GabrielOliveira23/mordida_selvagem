@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_rnlid")
 question_statement = "Quem era o produtor desta cadeia alimentar?"
-options = Array[String](["Foca", "Penguin", "Peixe", "Algas"])
+options = Array[String](["Foca", "Pinguim", "Peixe", "Algas"])
 correct_answer = "Algas"

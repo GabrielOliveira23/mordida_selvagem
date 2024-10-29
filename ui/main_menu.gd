@@ -17,7 +17,7 @@ func on_start_pressed() -> void:
 	get_tree().change_scene_to_packed(start_level)
 
 func on_options_pressed() -> void:
-	print("options ainda nao implementado")
+	printerr("options ainda nao implementado")
 
 func on_exit_pressed() -> void:
 	get_tree().quit()

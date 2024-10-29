@@ -1,6 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs25d5ehwm5w5"]
+[gd_scene load_steps=9 format=3 uid="uid://bs25d5ehwm5w5"]
 
+[ext_resource type="Script" path="res://scripts/controllers/jigsaw_controller.gd" id="1_7waa5"]
 [ext_resource type="Texture2D" uid="uid://dcp8roo1gojwy" path="res://art folder/menu/minigame-blue.png" id="1_dkfev"]
+[ext_resource type="Resource" uid="uid://ck3w7s3ta7dlj" path="res://resources/themes/theme.tres" id="2_0jf6t"]
+[ext_resource type="Texture2D" uid="uid://ciebcpu5alwdd" path="res://assets/sprites/Arrow.png" id="4_4w7i2"]
+[ext_resource type="PackedScene" uid="uid://x0unfdv85led" path="res://scenes/components/dropable_space.tscn" id="5_mwc43"]
+[ext_resource type="PackedScene" uid="uid://bbs2ngdxw6q88" path="res://scenes/components/object_draggable.tscn" id="6_6uj23"]
 
 [sub_resource type="SystemFont" id="SystemFont_o5vx6"]
 font_names = PackedStringArray("Impact")
@@ -12,15 +17,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7523"]
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="SystemFont" id="SystemFont_0wyd4"]
-font_names = PackedStringArray("Impact")
-
 [node name="PuzzleMapa1" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -28,6 +24,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_7waa5")
+chain = ExtResource("2_0jf6t")
+success_color = Color(0, 1, 0, 1)
+failed_color = Color(1, 0, 0, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -36,31 +37,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.705882)
 
-[node name="Container" type="MarginContainer" parent="."]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 75
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 75
-theme_override_constants/margin_bottom = 50
-
-[node name="Box" type="NinePatchRect" parent="Container"]
+[node name="Box" type="NinePatchRect" parent="."]
 texture_filter = 1
 layout_mode = 2
+offset_left = 75.0
+offset_top = 50.0
+offset_right = 949.0
+offset_bottom = 590.0
 texture = ExtResource("1_dkfev")
 patch_margin_left = 4
 patch_margin_top = 5
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="Title" type="Label" parent="Container/Box"]
+[node name="Title" type="Label" parent="Box"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -78,7 +71,7 @@ text = "monte a cadeia alimentar !"
 horizontal_alignment = 1
 uppercase = true
 
-[node name="Panel" type="Panel" parent="Container/Box"]
+[node name="Panel" type="Panel" parent="Box"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.501
@@ -89,128 +82,67 @@ offset_left = -407.874
 offset_top = -219.98
 offset_right = 406.378
 offset_bottom = 201.02
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_mk5rw")
 
-[node name="QuestionBox" type="MarginContainer" parent="Container/Box"]
-clip_contents = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.501
-anchor_top = 0.62
-anchor_right = 0.501
-anchor_bottom = 0.62
-offset_left = -407.874
-offset_top = -237.8
-offset_right = 408.126
-offset_bottom = 183.2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 15
-
-[node name="VContainer" type="VBoxContainer" parent="Container/Box/QuestionBox"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="Question" type="Panel" parent="Container/Box/QuestionBox/VContainer"]
+[node name="Arrow" type="Sprite2D" parent="."]
 texture_filter = 1
-custom_minimum_size = Vector2(0, 250)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_b7523")
+position = Vector2(272, 272)
+texture = ExtResource("4_4w7i2")
 
-[node name="Options" type="HBoxContainer" parent="Container/Box/QuestionBox/VContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Option" type="Button" parent="Container/Box/QuestionBox/VContainer/Options"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = SubResource("SystemFont_0wyd4")
-
-[node name="Option2" type="Button" parent="Container/Box/QuestionBox/VContainer/Options"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = SubResource("SystemFont_0wyd4")
-
-[node name="Option3" type="Button" parent="Container/Box/QuestionBox/VContainer/Options"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = SubResource("SystemFont_0wyd4")
-
-[node name="Option4" type="Button" parent="Container/Box/QuestionBox/VContainer/Options"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = SubResource("SystemFont_0wyd4")
-
-[node name="Option5" type="Button" parent="Container/Box/QuestionBox/VContainer/Options"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = SubResource("SystemFont_0wyd4")
-
-[node name="Option6" type="Button" parent="Container/Box/QuestionBox/VContainer/Options"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_default_cursor_shape = 2
-theme_override_fonts/font = SubResource("SystemFont_0wyd4")
-
-[node name="EndedQuiz" type="NinePatchRect" parent="Container"]
-visible = false
+[node name="Arrow3" type="Sprite2D" parent="."]
 texture_filter = 1
-layout_mode = 2
-texture = ExtResource("1_dkfev")
-patch_margin_left = 4
-patch_margin_top = 5
-patch_margin_right = 4
-patch_margin_bottom = 4
+position = Vector2(608, 272)
+texture = ExtResource("4_4w7i2")
 
-[node name="Title" type="Label" parent="Container/EndedQuiz"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 3.0
-offset_bottom = 130.0
-grow_horizontal = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = SubResource("SystemFont_o5vx6")
-theme_override_font_sizes/font_size = 50
-text = "Fim das Perguntas
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
-uppercase = true
+[node name="Arrow2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(776, 272)
+texture = ExtResource("4_4w7i2")
 
-[node name="Points" type="Label" parent="Container/EndedQuiz"]
+[node name="Arrow4" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(440, 272)
+texture = ExtResource("4_4w7i2")
+
+[node name="Dropable" type="Node" parent="."]
+
+[node name="DropableSpace" parent="Dropable" instance=ExtResource("5_mwc43")]
+position = Vector2(184, 272)
+
+[node name="DropableSpace2" parent="Dropable" instance=ExtResource("5_mwc43")]
+position = Vector2(352, 272)
+
+[node name="DropableSpace3" parent="Dropable" instance=ExtResource("5_mwc43")]
+position = Vector2(528, 272)
+
+[node name="DropableSpace4" parent="Dropable" instance=ExtResource("5_mwc43")]
+position = Vector2(688, 272)
+
+[node name="DropableSpace5" parent="Dropable" instance=ExtResource("5_mwc43")]
+position = Vector2(848, 272)
+
+[node name="Draggable" type="Node" parent="."]
+
+[node name="ObjectDraggable" parent="Draggable" instance=ExtResource("6_6uj23")]
+position = Vector2(208, 410)
+
+[node name="ObjectDraggable2" parent="Draggable" instance=ExtResource("6_6uj23")]
+position = Vector2(584, 418)
+
+[node name="ObjectDraggable3" parent="Draggable" instance=ExtResource("6_6uj23")]
+position = Vector2(456, 418)
+
+[node name="ObjectDraggable4" parent="Draggable" instance=ExtResource("6_6uj23")]
+position = Vector2(704, 418)
+
+[node name="ObjectDraggable5" parent="Draggable" instance=ExtResource("6_6uj23")]
+position = Vector2(336, 410)
+
+[node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 137.0
-offset_right = 776.0
-offset_bottom = 373.0
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 1
-uppercase = true
+offset_left = 456.0
+offset_top = 496.0
+offset_right = 543.0
+offset_bottom = 527.0
+text = "VERIFICAR"

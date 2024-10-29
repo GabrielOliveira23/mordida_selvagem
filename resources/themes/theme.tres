@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ChainTheme" load_steps=3 format=3 uid="uid://ck3w7s3ta7dlj"]
+
+[ext_resource type="Script" path="res://scripts/resources/theme.gd" id="1_jqvb1"]
+[ext_resource type="Resource" uid="uid://kxrqa6sxrqgi" path="res://resources/chain_problems/aquatic_chain.tres" id="2_1k3fn"]
+
+[resource]
+script = ExtResource("1_jqvb1")
+theme = Array[Resource("res://scripts/resources/chain_problem.gd")]([ExtResource("2_1k3fn")])

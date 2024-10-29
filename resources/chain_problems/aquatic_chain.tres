@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="ChainProblem" load_steps=2 format=3 uid="uid://kxrqa6sxrqgi"]
+
+[ext_resource type="Script" path="res://scripts/resources/chain_problem.gd" id="1_edje2"]
+
+[resource]
+script = ExtResource("1_edje2")
+correct_chain = Array[String](["Algas", "Camarao", "Peixe", "Pinguim", "Foca"])
+texture_paths = Array[String](["res://assets/sprites/algas.png", "res://assets/sprites/camarão.png", "res://assets/sprites/peixe.png", "res://assets/sprites/Pinguim.png", "res://assets/sprites/Foca.png"])
