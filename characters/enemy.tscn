@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dd2svkxjbayjh"]
 
 [ext_resource type="Script" path="res://characters/enemy.gd" id="1_m8tqs"]
-[ext_resource type="Texture2D" uid="uid://c6r7t4xch5c6y" path="res://assets/sprites/Foca.png" id="2_wcg24"]
+[ext_resource type="Texture2D" uid="uid://ddpepwhj03vtu" path="res://assets/sprites/Pinguim.png" id="2_uab5i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_45rxx"]
 radius = 154.029
@@ -19,7 +19,7 @@ script = ExtResource("1_m8tqs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = ExtResource("2_wcg24")
+texture = ExtResource("2_uab5i")
 
 [node name="detection_area" type="Area2D" parent="."]
 collision_layer = 2

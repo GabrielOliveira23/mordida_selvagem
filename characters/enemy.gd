@@ -1,14 +1,23 @@
 extends CharacterBody2D
 
-@export var speed = 120
+@export var speed = 0
 @export var player = Node2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
+@onready var enemy = $Sprite2D
+@onready var sprite = $Sprite2D
 
 var player_chase = false
 var direction = Vector2.RIGHT
 var patrol_vertical = false
+var initial_position: Vector2
 
-func _physics_process(_delta: float):
+var current_sprite = 2
+
+func _ready():
+	initial_position = global_position
+	enemy.texture = load(Global.sprite_path_list[current_sprite])
+
+func _physics_process(delta: float):
 	if player_chase:
 		var dir = to_local(nav_agent.get_next_path_position()).normalized()
 		velocity = dir * speed
@@ -21,6 +30,10 @@ func _physics_process(_delta: float):
 			velocity.y = 0
 	
 	move_and_slide()
+	
+	var collision = move_and_collide(velocity * delta)
+	if collision and collision.get_collider().is_in_group("player"):
+		eat_player(collision.get_collider())
 
 	if is_on_wall():
 		if patrol_vertical:
@@ -28,9 +41,22 @@ func _physics_process(_delta: float):
 		else:
 			direction.x *= -1
 
+func eat_player(player_node):
+	player_node.take_damage(1)
+	reset_position()
+
+func reset_position():
+	global_position = initial_position
+	player_chase = false
+	velocity = Vector2.ZERO
+
 func makepath() -> void:
 	if player_chase:
 		nav_agent.target_position = player.global_position
+
+func change_sprite():
+	current_sprite += 1
+	sprite.texture = load(Global.sprite_path_list[current_sprite])
 
 func _on_timer_timeout():
 	makepath()

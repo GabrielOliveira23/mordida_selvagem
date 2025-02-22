@@ -68,7 +68,7 @@ theme_override_constants/shadow_offset_y = 5
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = SubResource("SystemFont_m0dl5")
 theme_override_font_sizes/font_size = 50
-text = "GAME NAME"
+text = "MORDIDA SELVAGEM"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -92,18 +92,18 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = SubResource("SystemFont_8lqxl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_hjt3q")
-text = "Start Game"
+text = "Iniciar Jogo"
 
 [node name="OptionButton" type="Button" parent="MarginContainer/ColorMenu/VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = SubResource("SystemFont_8lqxl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_idbvk")
-text = "Options"
+text = "Opções"
 
 [node name="ExitButton" type="Button" parent="MarginContainer/ColorMenu/VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_fonts/font = SubResource("SystemFont_8lqxl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_fjcuk")
-text = "Exit Game"
+text = "Sair do Jogo"
